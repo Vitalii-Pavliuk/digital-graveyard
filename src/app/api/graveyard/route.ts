@@ -1,5 +1,5 @@
 import { dbConnect } from "../../../lib/db";
-import Project from "../../../lib/models/Project";
+import Grave from "../../../lib/models/Grave";
 
 export async function POST(req: Request) {
   try {
@@ -7,7 +7,7 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    const project = await Project.create({
+    const grave = await Grave.create({
       projectName: body.projectName,
       userName: body.userName,
       gitHubUrl: body.gitHubUrl,
@@ -21,13 +21,13 @@ export async function POST(req: Request) {
     });
 
     return Response.json(
-      { message: "project created", project },
+      { message: "grave created", grave },
       { status: 201 }
     );
     
   } catch (error) {
     return Response.json(
-      { message: "Error creating project", error },
+      { message: "Error creating grave", error },
       { status: 500 }
     );
   }
@@ -36,9 +36,9 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     await dbConnect();
-    const projects = await Project.find();
-    return Response.json(projects, { status: 200 });
+    const graveyard = await Grave.find();
+    return Response.json(graveyard, { status: 200 });
   } catch (error) {
-    return Response.json({ message: "Error fetching projects", error }, { status: 500 });
+    return Response.json({ message: "Error fetching graveyard", error }, { status: 500 });
   }
 }

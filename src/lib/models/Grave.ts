@@ -12,11 +12,11 @@ const CommentSchema = new Schema ({
   },
 });
 
-const ProjectSchema = new Schema({
+const GraveSchema = new Schema({
   projectName: {
     type: String,
     required: true,
-    unique: true,
+    // unique: true,
   },
   userName: {
     type: String,
@@ -61,4 +61,4 @@ const ProjectSchema = new Schema({
 
 });
 
-export default models.Project || model("Project", ProjectSchema);
+export default models.Grave || model("Grave", GraveSchema);

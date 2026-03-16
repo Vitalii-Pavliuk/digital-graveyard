@@ -1,13 +1,13 @@
-import { Project } from "../../types/project";
+import { Grave } from "../../types/grave";
 
 interface Props {
-  projects: Project;
+  graveyard: Grave;
 }
 
-export const GraveCard = ({ projects }: Props) => {
+export const GraveCard = ({ graveyard }: Props) => {
   return (
     <>
-      <h3>{projects.projectName}</h3>
+      <h3>{graveyard.projectName}</h3>
     </>
   );
 }

@@ -6,8 +6,8 @@ export default async function Home() {
   return (
    <>
    <div>
-        <Link href="/projects">
-        Link
+        <Link href="/graveyard">
+       <h1>Link</h1> 
       </Link>
    </div>
   </>

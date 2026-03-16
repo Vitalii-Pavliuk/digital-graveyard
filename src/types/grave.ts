@@ -3,7 +3,7 @@ export interface Comment {
   comment: string;
 }
 
-export interface Project {
+export interface Grave {
   _id: string;
   projectName: string;
   userName: string;

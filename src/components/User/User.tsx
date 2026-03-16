@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { createUser, getUsers } from "../../lib/api/users";
-import { User } from "../../types/project";
+import { User } from "../../types/grave";
 
 export default function AddUser() {
   const [users, setUsers] = useState<User[]>([]);
