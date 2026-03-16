@@ -16,7 +16,7 @@ export async function createProject(project: Project): Promise<Project[]> {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ project }),
+    body: JSON.stringify(project),
   });
 
     if (!res.ok) {

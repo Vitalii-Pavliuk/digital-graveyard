@@ -1,14 +1,15 @@
-import { use } from "react";
-import GraveCard from "../components/GraveCard/GraveCard";
-
-
+import Link from "next/link";
 
 export default async function Home() {
 
 
   return (
    <>
-   <GraveCard/>
+   <div>
+        <Link href="/projects">
+        Link
+      </Link>
+   </div>
   </>
   );
 } 

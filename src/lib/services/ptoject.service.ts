@@ -3,18 +3,16 @@ import { dbConnect } from "../db";
 
 import { Project } from "../../types/project";
 
-export async function getProjects(): Promise<Project[]> {
-      await dbConnect();
+export const getProjects = async (): Promise<Project[]> => {
+  await dbConnect();
+  const projects = await ProjectModel.find().lean();
+  return projects as unknown as Project[];
+};
 
-  return ProjectModel.find();
+export async function createProject(data: Omit<Project, "_id">) {
+  await dbConnect();
+  return ProjectModel.create(data);
 }
-
-export async function createProject(data: Project) {
-      await dbConnect();
-return ProjectModel.create({data});
-
-
- }
 
 
 
