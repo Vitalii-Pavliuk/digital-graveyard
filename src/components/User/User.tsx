@@ -1,28 +1,49 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useForm } from "react-hook-form";
 import { createUser, getUsers } from "../../lib/api/users";
-import { User } from "../../types/grave";
+import { useEffect, useState } from "react";
+import { User } from "@/types/grave";
+
+type FormData = {
+  name: string;
+  email: string;
+};
 
 export default function AddUser() {
   const [users, setUsers] = useState<User[]>([]);
 
-  useEffect(() => {
-    async function fetchUsers() {
-      try {
-        const data = await getUsers();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    }
-    fetchUsers();
-  }, []);
-
-  async function handleSubmit() {
+  async function fetchUsers() {
     try {
-      await createUser("Ivan", "ivan@gmail.com");
-      const updatedUsers = await getUsers();
-      setUsers(updatedUsers);
+      const data = await getUsers();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  }
+
+useEffect(() => {
+  async function loadUsers() {
+    try {
+      const data = await getUsers();
+      setUsers(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  loadUsers();
+}, []);
+
+  const { register, handleSubmit, reset } = useForm<FormData>();
+
+  async function onSubmit(data: FormData) {
+    try {
+      await createUser(data.name, data.email);
+
+      await fetchUsers(); 
+
+      reset();
     } catch (error) {
       console.error("Error creating user:", error);
     }
@@ -30,7 +51,14 @@ export default function AddUser() {
 
   return (
     <>
-      <button onClick={handleSubmit}>Create user</button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input {...register("name")} placeholder="Name" />
+
+        <input {...register("email")} placeholder="Email" />
+
+        <button type="submit">Create user</button>
+      </form>
+
       <div>
         {users.map((user) => (
           <div key={user._id}>

@@ -9,6 +9,10 @@ export default async function Home() {
         <Link href="/graveyard">
        <h1>Link</h1> 
       </Link>
+
+              <Link href="/newGrave">
+       <h1>Link</h1> 
+      </Link>
    </div>
   </>
   );
