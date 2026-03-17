@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { getSession } from "../auth";
+import { redirect } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export default async function Home() {
-
 
   return (
    <>

@@ -1,15 +1,21 @@
+import Providers from "../components/Providers/providers";
+import { getSession } from "../auth";
+import Header from "@/components/Header/Header";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const session = await getSession();
+
   return (
     <html lang="en">
       <body>
-        <header>header</header>
-        {children}
-        <footer>footer</footer>
+        <Providers session={session}>
+          <Header/>
+          {children}
+        </Providers>
       </body>
     </html>
   );
