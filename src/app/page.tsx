@@ -2,8 +2,11 @@ import Link from "next/link";
 import { getSession } from "../auth";
 import { redirect } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { getProjectName } from "./api/projects/route";
 
 export default async function Home() {
+
+
 
   return (
    <>
