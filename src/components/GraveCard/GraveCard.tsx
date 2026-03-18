@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Grave } from "../../types/grave";
 import "./GraveCard.css"
 
@@ -7,6 +8,10 @@ interface Props {
 
 export const GraveCard = ({ graveyard }: Props) => {
   return (
+
+        <Link 
+      href={`/grave/${graveyard._id}`}
+    >
     <div className="grave-card">
       <h3>{graveyard.projectName}</h3>
 
@@ -39,5 +44,6 @@ export const GraveCard = ({ graveyard }: Props) => {
         <strong>Condolences:</strong> {graveyard.condolence?.length || 0}
       </p>
     </div>
+    </Link>
   );
 };

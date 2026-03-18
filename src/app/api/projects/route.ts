@@ -1,4 +1,4 @@
-import {ProjectName} from "../../../types/ProjectNames"
+import {ProjectName} from "../../../types/projectNames"
 
 export const getProjectName = async (userName: string): Promise<ProjectName[]> => {
     const url = `https://api.github.com/users/${userName}/repos`;

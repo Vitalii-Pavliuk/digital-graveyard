@@ -14,6 +14,9 @@ export async function createGrave(data: Omit<Grave, "_id">) {
   return GraveModel.create(data);
 }
 
-
-
+export const getGrave = async (id: string): Promise<Grave | null> => {
+  await dbConnect();
+  const grave = await GraveModel.findById(id).lean();
+  return grave as unknown as Grave | null;
+};
 
