@@ -17,13 +17,6 @@ export const GraveCard = ({ graveyard }: Props) => {
 
       <p><strong>Author:</strong> {graveyard.userName}</p>
 
-      <p>
-        <strong>GitHub:</strong>{" "}
-        <a href={graveyard.gitHubUrl} target="_blank" rel="noopener noreferrer">
-          {graveyard.gitHubUrl}
-        </a>
-      </p>
-
       <p><strong>Epitaph:</strong> {graveyard.epitaph}</p>
 
       <p><strong>Description:</strong> {graveyard.description}</p>

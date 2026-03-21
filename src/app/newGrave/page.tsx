@@ -16,6 +16,7 @@ export default function AddGrave() {
     defaultValues: {
       userName: session?.user?.name || "",
     },
+    mode: "onChange"
   });
 
   const selectedProject = watch("projectName");
@@ -64,7 +65,7 @@ export default function AddGrave() {
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>{session.user?.name}</h1>
-        <select {...register("projectName")} data-testid="select">
+        <select {...register("projectName", { required: true })} data-testid="select">
           <option value="">Select a project</option>
           {projects.map((option) => (
             <option key={option.name} value={option.name}>
@@ -72,10 +73,10 @@ export default function AddGrave() {
             </option>
           ))}
         </select>
-        <input {...register("epitaph")} placeholder="epitaph" />
-        <input {...register("description")} placeholder="description" />
-        <input {...register("causeOfDeath")} placeholder="causeOfDeath" />
-        <input type="date" {...register("diedAt")} placeholder="diedAt" />
+        <input {...register("epitaph", { required: true })} placeholder="epitaph" />
+        <input {...register("description", { required: true })} placeholder="description" />
+        <input {...register("causeOfDeath", { required: true })} placeholder="causeOfDeath" />
+        <input type="date" {...register("diedAt", { required: true })} placeholder="diedAt" />
 
         <button type="submit">Create user</button>
       </form>

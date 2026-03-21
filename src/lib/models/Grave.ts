@@ -16,7 +16,7 @@ const GraveSchema = new Schema({
   projectName: {
     type: String,
     required: true,
-    // unique: true,
+    unique: true,
   },
   userName: {
     type: String,
@@ -25,6 +25,7 @@ const GraveSchema = new Schema({
   gitHubUrl: {
     type: String,
     required: true,
+    unique: true,
   },
   epitaph:{
  type: String,

@@ -15,17 +15,39 @@ export async function PATCH(
   const { id } = await params;
   const username = session.user.username;
 
+  try {
+
   await dbConnect();
 
-  const grave = await GraveModel.findByIdAndUpdate(
-    id,
-    { $addToSet: { candles: username } },
-    { new: true }
-  );
+  const body = await req.json();
+
+  
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const update: any = {};
+
+    if (body.addCandle) {
+      update.$addToSet = { candles: username };
+    }
+
+if (body.addCondolence) {
+  update.$push = {         
+    condolence: {
+      commentator: username,
+      comment: body.comment, 
+    },
+  };
+}
+    const grave = await GraveModel.findByIdAndUpdate(id, update, {
+      new: true,
+    });
 
   if (!grave) {
     return Response.json({ message: "Grave not found" }, { status: 404 });
   }
 
-  return Response.json({ candles: grave.candles }, { status: 200 });
+    return Response.json(grave, { status: 200 });
+} catch (error) {
+    console.error(error);
+    return Response.json({ message: "Server error" }, { status: 500 });
+  }
 }

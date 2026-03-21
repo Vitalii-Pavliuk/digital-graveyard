@@ -7,6 +7,17 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
+    const existingGrave = await Grave.findOne({
+      gitHubUrl: body.gitHubUrl,
+    });
+
+    if (existingGrave) {
+      return Response.json(
+        { message: "Такий запис вже існує" },
+        { status: 400 }
+      );
+    }
+
     const grave = await Grave.create({
       projectName: body.projectName,
       userName: body.userName,
@@ -24,21 +35,11 @@ export async function POST(req: Request) {
       { message: "grave created", grave },
       { status: 201 }
     );
-    
+
   } catch (error) {
     return Response.json(
       { message: "Error creating grave", error },
       { status: 500 }
     );
-  }
-}
-
-export async function GET() {
-  try {
-    await dbConnect();
-    const graveyard = await Grave.find();
-    return Response.json(graveyard, { status: 200 });
-  } catch (error) {
-    return Response.json({ message: "Error fetching graveyard", error }, { status: 500 });
   }
 }

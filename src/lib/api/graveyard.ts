@@ -20,7 +20,7 @@ export async function createGrave(grave: Grave): Promise<Grave[]> {
   });
 
     if (!res.ok) {
-    throw new Error("Failed to create grave");
+    alert("Такий запис вже існує");
   }
 
   return res.json();

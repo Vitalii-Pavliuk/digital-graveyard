@@ -19,9 +19,14 @@ export const CandleButton = ({ graveId, initialCandles }: Props) => {
     if (!username) return alert("Увійдіть щоб запалити свічку");
     if (hasLit) return;
 
-    const res = await fetch(`/api/graveyard/${graveId}`, {
-      method: "PATCH",
-    });
+
+const res = await fetch(`/api/graveyard/${graveId}`, {
+  method: "PATCH",
+  body: JSON.stringify({
+    addCandle: true,
+  }),
+});
+
 
     if (res.ok) {
       const data = await res.json();
