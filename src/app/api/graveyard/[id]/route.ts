@@ -51,3 +51,26 @@ if (body.addCondolence) {
     return Response.json({ message: "Server error" }, { status: 500 });
   }
 }
+
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.name) {
+    return Response.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  await dbConnect();
+  const grave = await GraveModel.findById(id);
+
+  if (grave?.userName !== session.user.name) {
+    return Response.json({ message: "Forbidden" }, { status: 403 });
+  }
+
+  await GraveModel.findByIdAndDelete(id);
+  return Response.json({ message: "Deleted" }, { status: 200 });
+}
