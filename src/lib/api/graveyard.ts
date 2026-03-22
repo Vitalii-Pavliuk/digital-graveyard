@@ -20,11 +20,10 @@ export async function createGrave(grave: Grave): Promise<Grave[]> {
   });
 
     if (!res.ok) {
-    alert("Такий запис вже існує");
+   throw new Error("Такий запис вже існує");
   }
 
   return res.json();
 }
-
 
 

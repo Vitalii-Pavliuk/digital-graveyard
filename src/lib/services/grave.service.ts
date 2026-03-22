@@ -20,3 +20,8 @@ export const getGrave = async (id: string): Promise<Grave | null> => {
   return grave as unknown as Grave | null;
 };
 
+export const getUserGraves = async (userName: string): Promise<Grave[] | null> => {
+  await dbConnect();
+  const grave = await GraveModel.find({userName: userName}).lean().exec();
+  return grave as unknown as Grave[];
+};
